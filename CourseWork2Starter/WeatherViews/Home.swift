@@ -18,16 +18,16 @@ struct Home: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("This is the initial view when the app launches, that must show  weather data as in Figure 1.\nInitial data is loaded from file on launch and a change of location should should update the weather data.\nBuild this view so that it mirrors this image")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            Text("Refer to Figure 1 for weather elements that must be rendered.")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+//            Text("This is the initial view when the app launches, that must show  weather data as in Figure 1.\nInitial data is loaded from file on launch and a change of location should should update the weather data.\nBuild this view so that it mirrors this image")
+//                .font(.subheadline)
+//                .fontWeight(.semibold)
+//                .multilineTextAlignment(.center)
+//                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+//            Text("Refer to Figure 1 for weather elements that must be rendered.")
+//                .font(.subheadline)
+//                .fontWeight(.semibold)
+//                .multilineTextAlignment(.center)
+//                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             HStack {
                 Spacer()
                 
@@ -74,7 +74,7 @@ struct Home: View {
             
             
             Spacer()
-        }
+        }.background(Image("background2").resizable().ignoresSafeArea())
         .onAppear {
             Task.init {
                 self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
@@ -83,5 +83,11 @@ struct Home: View {
             
         }
         
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        Home().environmentObject(ModelData())
     }
 }
