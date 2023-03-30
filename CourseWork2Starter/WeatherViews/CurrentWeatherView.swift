@@ -14,11 +14,11 @@ struct CurrentWeatherView: View {
     
     var body: some View {
         ZStack {
-            // Background Image rendering code here
+            Image("background2").resizable()
         
             VStack {
-                Text("This is the CurrentWeatherView that displays detailed\n current weather with icons as shown in Figure 2.\n Build this view here")
-                    .font(.subheadline)
+                Text("\(locationString)")
+                    .font(.largeTitle)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -26,6 +26,7 @@ struct CurrentWeatherView: View {
                 VStack{
 
         //          Temperature Info
+                    
                     VStack {
                         Text("\((Int)(modelData.forecast!.current.temp))ºC")
                             .padding()
@@ -48,7 +49,13 @@ struct CurrentWeatherView: View {
             .foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
             
-        }.ignoresSafeArea(edges: [.top, .trailing, .leading])
+        }.ignoresSafeArea()
+            .onAppear{
+                Task.init {
+                    self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
+                    
+                }
+            }
     }
 }
 

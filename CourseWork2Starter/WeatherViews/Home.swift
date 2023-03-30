@@ -67,11 +67,16 @@ struct Home: View {
                 .foregroundColor(.black)
                 .shadow(color: .black, radius: 0.5)
             
-            Text("The tab bar navigation must be re-engineered\n to mirror what has been shown in all the images.")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            
+            Text("Humidity: \(modelData.forecast!.current.humidity)%")
+                .padding()
+                .font(.title2)
+                .foregroundColor(.black)
+                .shadow(color: .black, radius: 0.5)
+            Text("Pressure: \(modelData.forecast!.current.pressure) hPa")
+                .padding()
+                .font(.title2)
+                .foregroundColor(.black)
+                .shadow(color: .black, radius: 0.5)
             
             Spacer()
         }.background(Image("background2").resizable().ignoresSafeArea())
