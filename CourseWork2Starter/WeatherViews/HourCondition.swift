@@ -9,15 +9,20 @@ import SwiftUI
 
 struct HourCondition: View {
     var current : Current
-    @State var icon:String = ""
+    //@State var icon:String = ""
     @State var url = URL(string:"")
     
     var body: some View {
         
-        HStack {
-            HStack {
-                Text(Date(timeIntervalSince1970: Double(current.dt)).formatted(.dateTime.hour().weekday()))
-                    .multilineTextAlignment(.center)
+        HStack{
+            HStack (alignment: .center, spacing: 8){
+                VStack{
+                    Text(Date(timeIntervalSince1970: Double(current.dt)).formatted(.dateTime.hour()))
+                        .multilineTextAlignment(.center)
+                    Text(Date(timeIntervalSince1970: Double(current.dt)).formatted(.dateTime.weekday()))
+                        .multilineTextAlignment(.center)
+                }
+                
                 AsyncImage(url:url){ phase in
                     switch phase {
                     case .empty:
@@ -34,14 +39,14 @@ struct HourCondition: View {
                     }
                 }
                 Text("\((Int)(current.temp))°C " + "\((current.weather[0].weatherDescription).rawValue.capitalized)")
-                    .multilineTextAlignment(.center)
-            }.padding(10)
+    
+            }
             Spacer()
         }
         .onAppear{
             url = URL(string:"https://openweathermap.org/img/wn/\(current.weather[0].icon)@2x.png")
         }
-        .padding()
+        //.padding(5)
     }
 }
 

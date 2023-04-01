@@ -12,9 +12,10 @@ struct ForecastView: View {
     @State var locationString: String = "No location"
     var body: some View {
         
-        VStack{Text("This is the ForeCastView that displays daily weather summary for next 7 days with icons as per Figure 4.\n Build this view here")
-                .font(.subheadline)
-                .fontWeight(.semibold)
+        VStack{
+            Text("\(locationString)")
+                .font(.largeTitle)
+                //.fontWeight(.semibold)
                 .multilineTextAlignment(.center)
                 .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
@@ -22,9 +23,8 @@ struct ForecastView: View {
                 ForEach(modelData.forecast!.daily) { day in
                     DailyView(day: day)
                 }
-            }
-        }
-
+            }.opacity(0.7)
+        }.background(Image("background2").resizable().ignoresSafeArea())
         .onAppear {
             Task.init {
                 self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)

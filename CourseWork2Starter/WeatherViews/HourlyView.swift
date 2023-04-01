@@ -29,7 +29,6 @@ struct HourlyView: View {
             List {
                 ForEach(modelData.forecast!.hourly) { hour in
                     HourCondition(current: hour)
-                    
                 }
             }.opacity(0.7)
             //.background()

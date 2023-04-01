@@ -9,22 +9,42 @@ import SwiftUI
 
 struct DailyView: View {
     var day : Daily
-   
+    @State var url = URL(string: "")
+    //@State var weekday:Date
+    
     var body: some View {
         
         HStack {
-            Text("Weather icon")
+            AsyncImage(url:url){ phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                case .success(let image):
+                    image
+                case .failure:
+                    Image(systemName: "questionmark.square.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100,height: 70)
+                default:
+                    ProgressView()
+                }
+            }
             Spacer()
             VStack {
-                Text("Weather description")
+                Text("\(day.weather[0].weatherDescription.rawValue.capitalized)")
                 
-                Text("Day and 2 digit date")
+                Text("\(Date(timeIntervalSince1970: Double(day.dt)).formatted(.dateTime.weekday(.wide))) \(Date(timeIntervalSince1970: Double(day.dt)).formatted(.dateTime.day(.twoDigits)))")
                 
             }
             Spacer()
-            Text("high temp and low temp")
+            Text("\((Int)(day.temp.max))°C / \((Int)(day.temp.min))°C")
            
-        }.padding()
+        }.onAppear{
+            url = URL(string:"https://openweathermap.org/img/wn/\(day.weather[0].icon)@2x.png")
+            //weekday =
+        }
+        .padding(10)
     }
     
 }
