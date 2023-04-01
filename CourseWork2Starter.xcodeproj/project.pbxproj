@@ -27,6 +27,7 @@
 		25AE53A329C3CD460024DED1 /* PollutionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AE53A229C3CD460024DED1 /* PollutionView.swift */; };
 		FAD1501B29D83B7900893048 /* PollutionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501A29D83B7900893048 /* PollutionData.swift */; };
 		FAD1501D29D83E2400893048 /* PollutionDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */; };
+		FAD1501F29D8F13E00893048 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501E29D8F13E00893048 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		25AE53A229C3CD460024DED1 /* PollutionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollutionView.swift; sourceTree = "<group>"; };
 		FAD1501A29D83B7900893048 /* PollutionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionData.swift; sourceTree = "<group>"; };
 		FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionDataStructure.swift; sourceTree = "<group>"; };
+		FAD1501E29D8F13E00893048 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			children = (
 				25AE538729C3CC580024DED1 /* LocationHelper.swift */,
 				25AE538929C3CC610024DED1 /* WindDirHelper.swift */,
+				FAD1501E29D8F13E00893048 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				25AE538E29C3CC7A0024DED1 /* ModelData.swift in Sources */,
 				FAD1501B29D83B7900893048 /* PollutionData.swift in Sources */,
 				25AE539C29C3CD080024DED1 /* HourCondition.swift in Sources */,
+				FAD1501F29D8F13E00893048 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
