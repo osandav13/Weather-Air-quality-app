@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NavBar: View {
     
+    @EnvironmentObject var modelData: ModelData
+    
     var body: some View {
         TabView{
            Home()
@@ -47,6 +49,6 @@ struct NavBar: View {
 
 struct NavBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavBar()
+        NavBar().environmentObject(ModelData())
     }
 }
