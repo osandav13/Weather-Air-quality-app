@@ -77,6 +77,13 @@ struct Home: View {
                 .font(.title2)
                 .foregroundColor(.black)
                 .shadow(color: .black, radius: 0.5)
+            HStack{
+                WeatherIcon(icon: modelData.forecast?.current.weather[0].icon ?? "")
+                Text("\((modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized)!)")
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
+            }
             
             Spacer()
         }.background(Image("background2").resizable().ignoresSafeArea())

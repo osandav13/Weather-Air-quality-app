@@ -9,8 +9,6 @@ import SwiftUI
 
 struct HourCondition: View {
     var current : Current
-    //@State var icon:String = ""
-    @State var url = URL(string:"")
     
     var body: some View {
         
@@ -23,30 +21,12 @@ struct HourCondition: View {
                         .multilineTextAlignment(.center)
                 }
                 
-                AsyncImage(url:url){ phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                    case .success(let image):
-                        image
-                    case .failure:
-                        Image(systemName: "questionmark.square.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100,height: 70)
-                    default:
-                        ProgressView()
-                    }
-                }
+                WeatherIcon(icon: current.weather[0].icon)
                 Text("\((Int)(current.temp))°C " + "\((current.weather[0].weatherDescription).rawValue.capitalized)")
     
             }
             Spacer()
         }
-        .onAppear{
-            url = URL(string:"https://openweathermap.org/img/wn/\(current.weather[0].icon)@2x.png")
-        }
-        //.padding(5)
     }
 }
 

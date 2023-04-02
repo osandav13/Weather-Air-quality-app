@@ -9,27 +9,11 @@ import SwiftUI
 
 struct DailyView: View {
     var day : Daily
-    @State var url = URL(string: "")
-    //@State var weekday:Date
-    
+
     var body: some View {
         
         HStack {
-            AsyncImage(url:url){ phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                case .failure:
-                    Image(systemName: "questionmark.square.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100,height: 70)
-                default:
-                    ProgressView()
-                }
-            }
+            WeatherIcon(icon: day.weather[0].icon)
             Spacer()
             VStack {
                 Text("\(day.weather[0].weatherDescription.rawValue.capitalized)")
@@ -40,8 +24,6 @@ struct DailyView: View {
             Spacer()
             Text("\((Int)(day.temp.max))°C / \((Int)(day.temp.min))°C")
            
-        }.onAppear{
-            url = URL(string:"https://openweathermap.org/img/wn/\(day.weather[0].icon)@2x.png")
         }
         .padding(10)
     }

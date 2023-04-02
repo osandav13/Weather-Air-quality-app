@@ -12,11 +12,6 @@ struct HourlyView: View {
     @EnvironmentObject var modelData: ModelData
     @State var locationString:String = ""
     
-//    init(){
-//        UITableView.appearance().backgroundColor = .clear
-//        UITableViewCell.appearance().backgroundColor = .clear
-//    }
-    
     var body: some View {
         VStack{
             
