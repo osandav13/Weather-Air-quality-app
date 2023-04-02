@@ -29,6 +29,7 @@
 		FAD1501D29D83E2400893048 /* PollutionDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */; };
 		FAD1501F29D8F13E00893048 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501E29D8F13E00893048 /* Constants.swift */; };
 		FAD1502129D9625800893048 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1502029D9625800893048 /* WeatherIcon.swift */; };
+		FAD1502329D98E6500893048 /* london air.json in Resources */ = {isa = PBXBuildFile; fileRef = FAD1502229D98E6500893048 /* london air.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionDataStructure.swift; sourceTree = "<group>"; };
 		FAD1501E29D8F13E00893048 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FAD1502029D9625800893048 /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
+		FAD1502229D98E6500893048 /* london air.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "london air.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		25AE53A429C3CD9B0024DED1 /* AirModel */ = {
 			isa = PBXGroup;
 			children = (
+				FAD1502229D98E6500893048 /* london air.json */,
 				FAD1501A29D83B7900893048 /* PollutionData.swift */,
 				FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */,
 			);
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AE539029C3CC810024DED1 /* london.json in Resources */,
+				FAD1502329D98E6500893048 /* london air.json in Resources */,
 				25AE537C29C3CB4D0024DED1 /* Preview Assets.xcassets in Resources */,
 				25AE537929C3CB4D0024DED1 /* Assets.xcassets in Resources */,
 			);
