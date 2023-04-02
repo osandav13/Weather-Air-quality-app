@@ -28,6 +28,7 @@
 		FAD1501B29D83B7900893048 /* PollutionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501A29D83B7900893048 /* PollutionData.swift */; };
 		FAD1501D29D83E2400893048 /* PollutionDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */; };
 		FAD1501F29D8F13E00893048 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1501E29D8F13E00893048 /* Constants.swift */; };
+		FAD1502129D9625800893048 /* WeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD1502029D9625800893048 /* WeatherIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		FAD1501A29D83B7900893048 /* PollutionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionData.swift; sourceTree = "<group>"; };
 		FAD1501C29D83E2400893048 /* PollutionDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionDataStructure.swift; sourceTree = "<group>"; };
 		FAD1501E29D8F13E00893048 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FAD1502029D9625800893048 /* WeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				25AE539129C3CCE20024DED1 /* ForecastView.swift */,
 				25AE539F29C3CD150024DED1 /* CurrentWeatherView.swift */,
 				25AE537629C3CB4C0024DED1 /* ContentView.swift */,
+				FAD1502029D9625800893048 /* WeatherIcon.swift */,
 			);
 			path = WeatherViews;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				25AE53A029C3CD150024DED1 /* CurrentWeatherView.swift in Sources */,
 				FAD1501D29D83E2400893048 /* PollutionDataStructure.swift in Sources */,
 				25AE538E29C3CC7A0024DED1 /* ModelData.swift in Sources */,
+				FAD1502129D9625800893048 /* WeatherIcon.swift in Sources */,
 				FAD1501B29D83B7900893048 /* PollutionData.swift in Sources */,
 				25AE539C29C3CD080024DED1 /* HourCondition.swift in Sources */,
 				FAD1501F29D8F13E00893048 /* Constants.swift in Sources */,

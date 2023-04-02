@@ -42,7 +42,6 @@ struct DailyView: View {
            
         }.onAppear{
             url = URL(string:"https://openweathermap.org/img/wn/\(day.weather[0].icon)@2x.png")
-            //weekday =
         }
         .padding(10)
     }
