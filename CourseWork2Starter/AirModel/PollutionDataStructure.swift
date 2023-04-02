@@ -9,10 +9,10 @@ import Foundation
 
 struct Pollution: Codable {
     let coord:[Double]
-    let list:[List]
+    let listinfo:[ListInfo]
 }
 
-struct List: Codable {
+struct ListInfo: Codable {
     let dt:Int
     let info: Info
     let components: Components
