@@ -90,7 +90,7 @@ struct Home: View {
         .onAppear {
             Task.init {
                 self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-                
+                self.modelData.userLocation = self.userLocation
             }
             
         }
