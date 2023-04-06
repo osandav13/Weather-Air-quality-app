@@ -8,39 +8,44 @@
 import Foundation
 
 struct Pollution: Codable {
-    let coord:[Double]
-    let listinfo:[ListInfo]
+    let coord:Coord
+    let list:[ListInfo]
+}
+
+struct Coord:Codable{
+    let lon:Double
+    let lat:Double
 }
 
 struct ListInfo: Codable {
     let dt:Int
-    let info: Info
+    let main: Info
     let components: Components
     
-    enum CodingKeys:String, CodingKey {
-        case dt
-        case info = "main"
-        case components
-    }
+//    enum CodingKeys:String, CodingKey {
+//        case dt
+//        case info = "main"
+//        case components
+//    }
 }
 
 struct Info: Codable {
-    let airQulityIndex:String
+    let aqi:Int
     
-    enum Codingkeys:String, CodingKey {
-        case airQulityIndex = "aqi"
-    }
+//    enum Codingkeys:String, CodingKey {
+//        case airQulityIndex = "aqi"
+//    }
 }
 
 struct Components:Codable {
-    let carbonMonoxide:String
-    let nitrogenMonoxide:String
-    let nitrogenDioxide:String
-    let ozone:String
-    let sulphurDioxide:String
-    let FineParticlesMatter:String
-    let CoarseParticulateMatter:String
-    let ammonia:String
+    let carbonMonoxide:Double
+    let nitrogenMonoxide:Double
+    let nitrogenDioxide:Double
+    let ozone:Double
+    let sulphurDioxide:Double
+    let FineParticlesMatter:Double
+    let CoarseParticulateMatter:Double
+    let ammonia:Double
 
 
     enum CodingKeys:String, CodingKey{
