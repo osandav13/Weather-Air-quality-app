@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PollutionView: View {
     
-    //@EnvironmentObject airModel:
+    @EnvironmentObject var airModel: PollutionData
 
     var body: some View {
         
@@ -19,7 +19,7 @@ struct PollutionView: View {
             VStack {
                 Text("")
                 Spacer()
-                Text("This is a mixed view with weather \n and air quality data,\n refer to Figure 5 to see what data must be displayed here")
+                Text("\(airModel.poluttion!.list[0].components.sulphurDioxide)")
                 Spacer()
 
             }.foregroundColor(.black)
@@ -32,9 +32,6 @@ struct PollutionView: View {
 
 struct PollutionPreviews: PreviewProvider {
     static var previews: some View {
-        PollutionView().environmentObject(ModelData())
+        PollutionView().environmentObject(PollutionData())
     }
 }
-
-    
-
