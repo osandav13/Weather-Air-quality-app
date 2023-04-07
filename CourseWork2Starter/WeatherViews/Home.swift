@@ -16,18 +16,8 @@ struct Home: View {
     
     
     var body: some View {
-        VStack {
+        VStack (spacing:30){
             Spacer()
-//            Text("This is the initial view when the app launches, that must show  weather data as in Figure 1.\nInitial data is loaded from file on launch and a change of location should should update the weather data.\nBuild this view so that it mirrors this image")
-//                .font(.subheadline)
-//                .fontWeight(.semibold)
-//                .multilineTextAlignment(.center)
-//                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-//            Text("Refer to Figure 1 for weather elements that must be rendered.")
-//                .font(.subheadline)
-//                .fontWeight(.semibold)
-//                .multilineTextAlignment(.center)
-//                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
             HStack {
                 Spacer()
                 
@@ -41,50 +31,52 @@ struct Home: View {
                 .sheet(isPresented: $isSearchOpen) {
                     SearchView(isSearchOpen: $isSearchOpen, userLocation: $userLocation)
                 }
-                .padding()
+                
                 
                 Spacer()
-            }
-            
-            Text(userLocation)
-                .font(.title)
+            }.padding(.bottom,20)
+            VStack{
+                Text(userLocation)
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
+                    .multilineTextAlignment(.center)
+                
+                Text(Date(timeIntervalSince1970: TimeInterval(((Int)(modelData.forecast?.current.dt ?? 0))))
+                    .formatted(.dateTime.year().hour().month().day()))
+                .padding()
+                .font(.largeTitle)
                 .foregroundColor(.black)
-                .shadow(color: .black, radius: 0.5)
-                .multilineTextAlignment(.center)
+                .shadow(color: .black, radius: 1)
+            }.padding(.top,30)
             
-            Text(Date(timeIntervalSince1970: TimeInterval(((Int)(modelData.forecast?.current.dt ?? 0))))
-                .formatted(.dateTime.year().hour().month().day()))
-            .padding()
-            .font(.largeTitle)
-            .foregroundColor(.black)
-            .shadow(color: .black, radius: 1)
             
             Spacer()
-            
-            Text("Temp: \((Int)(modelData.forecast!.current.temp))ºC")
-                .padding()
-                .font(.title2)
-                .foregroundColor(.black)
-                .shadow(color: .black, radius: 0.5)
-            
-            Text("Humidity: \(modelData.forecast!.current.humidity)%")
-                .padding()
-                .font(.title2)
-                .foregroundColor(.black)
-                .shadow(color: .black, radius: 0.5)
-            Text("Pressure: \(modelData.forecast!.current.pressure) hPa")
-                .padding()
-                .font(.title2)
-                .foregroundColor(.black)
-                .shadow(color: .black, radius: 0.5)
-            HStack{
-                WeatherIcon(icon: modelData.forecast?.current.weather[0].icon ?? "")
-                Text("\((modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized)!)")
+            VStack{
+                Text("Temp: \((Int)(modelData.forecast!.current.temp))ºC")
+                    .padding()
                     .font(.title2)
                     .foregroundColor(.black)
                     .shadow(color: .black, radius: 0.5)
-            }
-            
+                
+                Text("Humidity: \(modelData.forecast!.current.humidity)%")
+                    .padding()
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
+                Text("Pressure: \(modelData.forecast!.current.pressure) hPa")
+                    .padding()
+                    .font(.title2)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
+                HStack{
+                    WeatherIcon(icon: modelData.forecast?.current.weather[0].icon ?? "")
+                    Text("\((modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized)!)")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .shadow(color: .black, radius: 0.5)
+                }
+            }.padding(.top,40)
             Spacer()
         }.background(Image("background2").resizable().ignoresSafeArea())
         .onAppear {
