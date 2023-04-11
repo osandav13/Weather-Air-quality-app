@@ -56,10 +56,10 @@ struct PollutionView: View {
                 }
                 
                 HStack(spacing: 70){
-                    Text(String(pollutionModel.poluttion!.list[0].components.sulphurDioxide))
-                    Text(String(pollutionModel.poluttion!.list[0].components.nitrogenDioxide))
-                    Text(String(pollutionModel.poluttion!.list[0].components.CoarseParticulateMatter))
-                    Text(String(pollutionModel.poluttion!.list[0].components.FineParticlesMatter))
+                    Text(String(pollutionModel.pollution!.list[0].components.sulphurDioxide))
+                    Text(String(pollutionModel.pollution!.list[0].components.nitrogenDioxide))
+                    Text(String(pollutionModel.pollution!.list[0].components.CoarseParticulateMatter))
+                    Text(String(pollutionModel.pollution!.list[0].components.FineParticlesMatter))
                 }
                 Spacer()
 
