@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct DailyView: View {
-    var day : Daily
-
+    var day : Daily?
+    @State var weatherIcon:String = ""
+    
     var body: some View {
         
         HStack {
-            WeatherIcon(icon: day.weather[0].icon)
+            WeatherIcon(icon: $weatherIcon)
             Spacer()
             VStack {
-                Text("\(day.weather[0].weatherDescription.rawValue.capitalized)")
+                Text("\(day?.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")")
                 
-                Text("\(Date(timeIntervalSince1970: Double(day.dt)).formatted(.dateTime.weekday(.wide))) \(Date(timeIntervalSince1970: Double(day.dt)).formatted(.dateTime.day(.twoDigits)))")
+                Text("\(Date(timeIntervalSince1970: Double(day?.dt ?? 0)).formatted(.dateTime.weekday(.wide))) \(Date(timeIntervalSince1970: Double(day?.dt ?? 0)).formatted(.dateTime.day(.twoDigits)))")
                 
             }
             Spacer()
-            Text("\((Int)(day.temp.max))°C / \((Int)(day.temp.min))°C")
+            Text("\((Int)(day?.temp.max ?? 0))°C / \((Int)(day?.temp.min ?? 0))°C")
            
+        }.padding(10)
+        .onAppear{
+            weatherIcon = day?.weather[0].icon ?? ""
         }
-        .padding(10)
     }
     
 }

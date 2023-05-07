@@ -11,7 +11,7 @@ struct PollutionView: View {
     
     @EnvironmentObject var pollutionModel: PollutionData
     @EnvironmentObject var modelData: ModelData
-    @State var locationString:String = ""
+    @State var weatherIcon:String = ""
 
     var body: some View {
         
@@ -21,28 +21,29 @@ struct PollutionView: View {
             VStack (spacing:30){
                 Spacer()
                 VStack(spacing:40){
-                    Text("\(locationString)")
+                    Text("\(modelData.userLocation)")
                         .font(.title)
                         .foregroundColor(.black)
                         .shadow(color: .black, radius: 0.5)
                         .multilineTextAlignment(.center)
+                        .padding(.all)
 
-                    Text("\((Int)(modelData.forecast!.current.temp))°C")
+                    Text("\((Int)(modelData.forecast?.current.temp ?? 0))°C")
                         .font(.largeTitle)
                         .foregroundColor(.black)
                 }
                 
                 HStack{
-                    WeatherIcon(icon: modelData.forecast!.current.weather[0].icon)
-                    Text(modelData.forecast!.current.weather[0].weatherDescription.rawValue.capitalized)
+                    WeatherIcon(icon: $weatherIcon)
+                    Text(modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")
                         .foregroundColor(.black)
                 }
                 
                 HStack(spacing:40){
-                    Text("High: \((Int)(modelData.forecast!.daily[0].temp.max))°C")
-                    Text("Low: \((Int)(modelData.forecast!.daily[0].temp.min))°C")
+                    Text("High: \((Int)(modelData.forecast?.daily[0].temp.max ?? 0))°C")
+                    Text("Low: \((Int)(modelData.forecast?.daily[0].temp.min ?? 0))°C")
                 }
-                Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
+                Text("Feels Like: \((Int)(modelData.forecast?.current.feelsLike ?? 0))ºC")
                     .foregroundColor(.black)
                 Text("Air Quality Data:")
                     .font(.title)
@@ -56,10 +57,10 @@ struct PollutionView: View {
                 }
                 
                 HStack(spacing: 70){
-                    Text(String(pollutionModel.pollution!.list[0].components.sulphurDioxide))
-                    Text(String(pollutionModel.pollution!.list[0].components.nitrogenDioxide))
-                    Text(String(pollutionModel.pollution!.list[0].components.CoarseParticulateMatter))
-                    Text(String(pollutionModel.pollution!.list[0].components.FineParticlesMatter))
+                    Text(String(pollutionModel.pollution?.list[0].components.sulphurDioxide ?? 0))
+                    Text(String(pollutionModel.pollution?.list[0].components.nitrogenDioxide ?? 0))
+                    Text(String(pollutionModel.pollution?.list[0].components.CoarseParticulateMatter ?? 0))
+                    Text(String(pollutionModel.pollution?.list[0].components.FineParticlesMatter ?? 0))
                 }
                 Spacer()
 
@@ -69,12 +70,9 @@ struct PollutionView: View {
             .shadow(color: .black,  radius: 0.5)
                 
         }.ignoresSafeArea(edges: [.top, .trailing, .leading])
-            .onAppear{
-                Task.init {
-                    self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-                    
-                }
-            }
+        .onAppear{
+            weatherIcon = modelData.forecast?.current.weather[0].icon ?? ""
+        }
     }
 }
 

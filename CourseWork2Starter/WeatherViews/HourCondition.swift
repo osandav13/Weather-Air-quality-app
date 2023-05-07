@@ -8,24 +8,27 @@
 import SwiftUI
 
 struct HourCondition: View {
-    var current : Current
+    var current : Current?
+    @State var weatherIcon:String = ""
     
     var body: some View {
         
         HStack{
             HStack (alignment: .center, spacing: 8){
                 VStack{
-                    Text(Date(timeIntervalSince1970: Double(current.dt)).formatted(.dateTime.hour()))
+                    Text(Date(timeIntervalSince1970: Double(current?.dt ?? 0)).formatted(.dateTime.hour()))
                         .multilineTextAlignment(.center)
-                    Text(Date(timeIntervalSince1970: Double(current.dt)).formatted(.dateTime.weekday()))
+                    Text(Date(timeIntervalSince1970: Double(current?.dt ?? 0)).formatted(.dateTime.weekday()))
                         .multilineTextAlignment(.center)
                 }
                 
-                WeatherIcon(icon: current.weather[0].icon)
-                Text("\((Int)(current.temp))°C " + "\((current.weather[0].weatherDescription).rawValue.capitalized)")
+                WeatherIcon(icon: $weatherIcon)
+                Text("\((Int)(current?.temp ?? 0))°C " + "\(current?.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")")
     
             }
             Spacer()
+        }.onAppear{
+            weatherIcon = current?.weather[0].icon ?? ""
         }
     }
 }

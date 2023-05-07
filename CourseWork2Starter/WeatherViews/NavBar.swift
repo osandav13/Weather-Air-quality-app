@@ -12,7 +12,7 @@ struct NavBar: View {
     @EnvironmentObject var modelData: ModelData
     
     var body: some View {
-        TabView{
+        TabView {
            Home()
                 .tabItem{
                     
@@ -42,6 +42,7 @@ struct NavBar: View {
         }.onAppear {
             UITabBar.appearance().isTranslucent = false
         }
+        .tint(Color("tintColor"))
         
     }
         

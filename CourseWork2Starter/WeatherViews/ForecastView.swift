@@ -11,24 +11,22 @@ struct ForecastView: View {
     @EnvironmentObject var modelData: ModelData
     @State var locationString: String = "No location"
     var body: some View {
-        
-        VStack{
-            Text("\(locationString)")
-                .font(.largeTitle)
-                //.fontWeight(.semibold)
-                .multilineTextAlignment(.center)
-                .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        ZStack{
+            Image("background2").resizable().ignoresSafeArea()
+            VStack{
+                Text("\(modelData.userLocation)")
+                    .font(.title)
+                    //.fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
+                    .multilineTextAlignment(.center)
+                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
-            List{
-                ForEach(modelData.forecast!.daily) { day in
-                    DailyView(day: day)
-                }
-            }.opacity(0.7)
-        }.background(Image("background2").resizable().ignoresSafeArea())
-        .onAppear {
-            Task.init {
-                self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-               
+                List{
+                    ForEach(modelData.forecast!.daily) { day in
+                        DailyView(day: day)
+                    }
+                }.opacity(0.7)
             }
         }
     }
