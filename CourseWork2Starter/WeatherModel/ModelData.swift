@@ -8,20 +8,16 @@ class ModelData: ObservableObject {
     }
     
 
-    func loadData(lat: Double, lon: Double) async throws -> Forecast {
+    func loadData(lat: Double, lon: Double) async throws {
         let url = URL(string: "https://api.openweathermap.org/data/3.0/onecall?lat=\(lat)&lon=\(lon)&units=metric&appid=\(API.key)")
         let session = URLSession(configuration: .default)
         
-        let (data, _) = try await session.data(from: url!)
-        
         do {
-            //print(data)
+            let (data, _) = try await session.data(from: url!)
             let forecastData = try JSONDecoder().decode(Forecast.self, from: data)
             DispatchQueue.main.async {
                 self.forecast = forecastData
             }
-            
-            return forecastData
         } catch {
             throw error
         }

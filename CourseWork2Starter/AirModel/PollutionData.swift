@@ -9,18 +9,27 @@ import Foundation
 
 class PollutionData: ObservableObject{
     
-    @Published var poluttion: Pollution?
+    @Published var pollution: Pollution?
     
     init (){
-        self.poluttion = load(filename: "london air.json")
+        self.pollution = load(filename: "london air.json")
     }
     
-    func fetch(lat:String, lon:String){
-        let url = URL(string:"https://api.openweathermap.org/data/2.5/air_pollution?lat=\(lat)&lon=\(lon)&appid=\(API.key)")
-        //URLSession
-        
+    //get data from the openweather api and add the the data to the pollution model
+    func fetch(lat:Double, lon:Double) async throws {
+        let url = URL(string:"https://api.openweathermap.org/data/2.5/air_pollution?lat=\(lat)&lon=\(lon)&appid=\(API.key)")!
+        do{
+            let (Data,_) = try await URLSession.shared.data(from:url,delegate:nil)
+            let pollutionData = try JSONDecoder().decode(Pollution.self, from: Data)
+            DispatchQueue.main.async {
+                self.pollution = pollutionData
+            }
+        } catch {
+            throw error
+        }
     }
     
+    // loading the initial poluution data that will be used in the pollution view
     func load<Pollution:Decodable>(filename:String) -> Pollution{
         let data:Data
         
