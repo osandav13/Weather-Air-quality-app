@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct WeatherIcon: View {
-    @State var icon:String
+    @Binding var icon:String
     @State var url = URL(string: "")
     
     var body: some View {
         HStack{
-            AsyncImage(url:url){ phase in
+            AsyncImage(url:URL(string: "https://openweathermap.org/img/wn/\(icon)@2x.png?")){ phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -28,8 +28,6 @@ struct WeatherIcon: View {
                     ProgressView()
                 }
             }
-        }.onAppear{
-            url = URL(string:"https://openweathermap.org/img/wn/\(icon)@2x.png")
         }
     }
 }
