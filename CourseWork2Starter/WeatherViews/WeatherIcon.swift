@@ -32,9 +32,3 @@ struct WeatherIcon: View {
     }
 }
 
-struct WeatherIcon_Previews: PreviewProvider {
-    static var day = ModelData().forecast!.current
-    static var previews: some View {
-        WeatherIcon(icon: day.weather[0].icon)
-    }
-}
