@@ -21,20 +21,10 @@ struct ListInfo: Codable {
     let dt:Int
     let main: Info
     let components: Components
-    
-//    enum CodingKeys:String, CodingKey {
-//        case dt
-//        case info = "main"
-//        case components
-//    }
 }
 
 struct Info: Codable {
     let aqi:Int
-    
-//    enum Codingkeys:String, CodingKey {
-//        case airQulityIndex = "aqi"
-//    }
 }
 
 struct Components:Codable {

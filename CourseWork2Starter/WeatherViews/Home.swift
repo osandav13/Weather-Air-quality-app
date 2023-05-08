@@ -12,16 +12,17 @@ struct Home: View {
     
     @EnvironmentObject var modelData: ModelData
     @State var isSearchOpen: Bool = false
-    //@State  var userLocation: String = ""
-    //@State var new:String = ""
     
     var body: some View {
         ZStack{
+            //background image
             Image("background2").resizable().ignoresSafeArea()
+            // all the other data in the home view
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
+                    // change location button to find details of different places
                     Button(action: {
                         self.isSearchOpen.toggle()
                     }) {
@@ -37,28 +38,12 @@ struct Home: View {
                         .background(Color("buttonColor"))
                         .cornerRadius(40)
                     }
-                    
-//                    Button(action:{
-//                        self.isSearchOpen.toggle()
-//                    }){
-//                        HStack{
-//                            Image(systemName: "location")
-//                            Text("Change Location")
-//                                .padding()
-//                                .foregroundColor(.white)
-//                                .background(Color("new"))
-//                                //.bold()
-//                                .font(.system(size: 30))
-//                                //.border(Color.blue,width: 3)
-//                                .cornerRadius(30)
-//                        }
-//                    }
+                    // sheet view to change the location
                     .sheet(isPresented: $isSearchOpen) {
                         SearchView(isSearchOpen: $isSearchOpen)
                             .presentationDetents([.medium])//, userLocation: $userLocation)
                             .presentationDragIndicator(.visible)
                     }
-                    
                     
                     Spacer()
                 }.padding(.bottom,10)
@@ -81,7 +66,6 @@ struct Home: View {
                 
                 Spacer()
                 VStack{
-                    //if let temp = modelData.forecast?.current.temp
                     Text("Temp: \((Int)(modelData.forecast?.current.temp ?? 0))ºC")
                         .padding()
                         .font(.title2)
@@ -99,8 +83,7 @@ struct Home: View {
                         .foregroundColor(.black)
                         .shadow(color: .black, radius: 0.5)
                     HStack{
-                        //Text(modelData.forecast!.current.weather[0].icon)
-                        //WeatherIcon(icon: modelData.forecast!.current.weather[0].icon)
+                        // loading the weather icon
                         AsyncImage(url:URL(string: "https://openweathermap.org/img/wn/\(modelData.forecast!.current.weather[0].icon)@2x.png?")){ phase in
                             switch phase {
                             case .empty:
@@ -126,8 +109,7 @@ struct Home: View {
             }
         }.onAppear {
             Task.init {
-                //new = modelData.forecast!.current.weather[0].icon
-                //self.userLocation = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
+                // updating the location when the view appear
                 self.modelData.userLocation = await getLocFromLatLong(lat: modelData.forecast?.lat ?? 0, lon: modelData.forecast?.lon ?? 0)
             }
         }

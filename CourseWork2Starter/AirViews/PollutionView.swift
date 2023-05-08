@@ -18,6 +18,7 @@ struct PollutionView: View {
         ZStack {
             // Use ZStack for background images
             Image("background").resizable().ignoresSafeArea()
+            // all the texts and images
             VStack (spacing:30){
                 Spacer()
                 VStack(spacing:40){
@@ -34,6 +35,7 @@ struct PollutionView: View {
                 }
                 
                 HStack{
+                    // wether icon from openweather
                     WeatherIcon(icon: $weatherIcon)
                     Text(modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")
                         .foregroundColor(.black)
@@ -51,9 +53,13 @@ struct PollutionView: View {
                 
                 HStack(spacing: 20){
                     Image("so2").resizable().scaledToFit().frame(width:80,height: 70)
+                        .cornerRadius(15)
                     Image("no").resizable().scaledToFit().frame(width:80,height: 70)
+                        .cornerRadius(15)
                     Image("voc").resizable().scaledToFit().frame(width:80,height: 70)
+                        .cornerRadius(15)
                     Image("pm").resizable().scaledToFit().frame(width:80,height: 70)
+                        .cornerRadius(15)
                 }
                 
                 HStack(spacing: 70){
@@ -63,9 +69,6 @@ struct PollutionView: View {
                     Text(String(pollutionModel.pollution?.list[0].components.FineParticlesMatter ?? 0))
                 }
                 Spacer()
-
-                //Spacer()
-
             }.foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
                 

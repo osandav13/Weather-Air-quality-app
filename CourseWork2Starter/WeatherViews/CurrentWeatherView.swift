@@ -25,14 +25,13 @@ struct CurrentWeatherView: View {
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
                 VStack (spacing:40){
-
         //          Temperature Info
-                    
                     VStack {
                         Text("\((Int)(modelData.forecast?.current.temp ?? 0))ºC")
                             .padding()
                             .font(.largeTitle)
                         HStack {
+                            // weather icon from openweather
                             WeatherIcon(icon: $weatherIcon)
                             Text(modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")
                                 .foregroundColor(.black)
@@ -49,7 +48,7 @@ struct CurrentWeatherView: View {
                         }
                         
                     }.padding(30)
-                    
+                    // wind info
                     VStack(spacing:50){
                         HStack(spacing:60){
                             Text("Wind Speed: \((Int)(modelData.forecast?.daily[0].windSpeed ?? 0)) m/s")
@@ -62,10 +61,8 @@ struct CurrentWeatherView: View {
 
                         }
                     }
-                    
-                    
-                }//.padding(.bottom)
-
+                }
+                // sun rise info
                 HStack(spacing:10){
                     Image(systemName: "sunset.fill").foregroundColor(.yellow)
                     Text(Date(timeIntervalSince1970: Double(modelData.forecast?.current.sunset ?? 0)).formatted(.dateTime.hour().minute()))
@@ -75,15 +72,11 @@ struct CurrentWeatherView: View {
             }
             .foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
-            
         }
         .ignoresSafeArea()
         .onAppear{
-//            Task.init {
-                weatherIcon = modelData.forecast?.current.weather[0].icon ?? ""
-//                //self.locationString = await getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
-//
-//            }
+            // updating weather icon data on view appearence
+            weatherIcon = modelData.forecast?.current.weather[0].icon ?? ""
         }
     }
 }

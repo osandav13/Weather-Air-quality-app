@@ -118,9 +118,9 @@
 				25AE539D29C3CD0E0024DED1 /* Home.swift */,
 				25AE539929C3CCFE0024DED1 /* HourlyView.swift */,
 				25AE539B29C3CD080024DED1 /* HourCondition.swift */,
+				25AE537629C3CB4C0024DED1 /* ContentView.swift */,
 				25AE539129C3CCE20024DED1 /* ForecastView.swift */,
 				25AE539F29C3CD150024DED1 /* CurrentWeatherView.swift */,
-				25AE537629C3CB4C0024DED1 /* ContentView.swift */,
 				FAD1502029D9625800893048 /* WeatherIcon.swift */,
 			);
 			path = WeatherViews;

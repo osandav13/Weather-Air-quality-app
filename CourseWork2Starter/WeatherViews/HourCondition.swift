@@ -12,7 +12,7 @@ struct HourCondition: View {
     @State var weatherIcon:String = ""
     
     var body: some View {
-        
+        // hour view data
         HStack{
             HStack (alignment: .center, spacing: 8){
                 VStack{
@@ -21,7 +21,7 @@ struct HourCondition: View {
                     Text(Date(timeIntervalSince1970: Double(current?.dt ?? 0)).formatted(.dateTime.weekday()))
                         .multilineTextAlignment(.center)
                 }
-                
+                // weather icon from open weather
                 WeatherIcon(icon: $weatherIcon)
                 Text("\((Int)(current?.temp ?? 0))°C " + "\(current?.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")")
     

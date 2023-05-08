@@ -7,12 +7,13 @@ class ModelData: ObservableObject {
         self.forecast = load("london.json")
     }
     
-
-    func loadData(lat: Double, lon: Double) async throws {
+    // get weather data from the openweather api and add the them to the environment object
+    func fetchWeather(lat: Double, lon: Double) async throws {
         let url = URL(string: "https://api.openweathermap.org/data/3.0/onecall?lat=\(lat)&lon=\(lon)&units=metric&appid=\(API.key)")
         let session = URLSession(configuration: .default)
         
         do {
+            //network call to get the data
             let (data, _) = try await session.data(from: url!)
             let forecastData = try JSONDecoder().decode(Forecast.self, from: data)
             DispatchQueue.main.async {
@@ -22,7 +23,7 @@ class ModelData: ObservableObject {
             throw error
         }
     }
-    
+    // loading the initial weather data from the json file
     func load<Forecast: Decodable>(_ filename: String) -> Forecast {
         let data: Data
         

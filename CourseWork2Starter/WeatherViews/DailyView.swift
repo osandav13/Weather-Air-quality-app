@@ -12,8 +12,9 @@ struct DailyView: View {
     @State var weatherIcon:String = ""
     
     var body: some View {
-        
+        // list item view
         HStack {
+            // weather icon from open weather
             WeatherIcon(icon: $weatherIcon)
             Spacer()
             VStack {

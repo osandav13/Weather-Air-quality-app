@@ -15,13 +15,13 @@ func getLocFromLatLong(lat: Double, lon: Double) async -> String
     let center: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: lat, longitude: lon)
     
     let ceo: CLGeocoder = CLGeocoder()
-    
-    let loc: CLLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
+    // converting latitude and longitude to a location
+    let location: CLLocation = CLLocation(latitude: center.latitude, longitude: center.longitude)
     do {
-        placemarks = try await ceo.reverseGeocodeLocation(loc)
-        print("place details \(placemarks) array count \(placemarks.count)")
+        //reversing the location data to find
+        placemarks = try await ceo.reverseGeocodeLocation(location)
+        // making the location string depending on the availible data
         if placemarks.count > 0 {
-            
             
             if (!placemarks[0].name!.isEmpty) {
                 

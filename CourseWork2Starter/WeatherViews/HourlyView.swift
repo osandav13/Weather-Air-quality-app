@@ -10,30 +10,29 @@ import SwiftUI
 struct HourlyView: View {
     
     @EnvironmentObject var modelData: ModelData
-    //@State var locationString:String = ""
     
     var body: some View {
         ZStack{
+            // background image
             Image("background")
                 .resizable()
                 .ignoresSafeArea()
+            // hourly view data
             VStack{
                 Text("\(modelData.userLocation)")
                     .font(.title)
-                    //.fontWeight(.semibold)
                     .foregroundColor(.black)
                     .shadow(color: .black, radius: 0.5)
                     .multilineTextAlignment(.center)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-                //Image("background2")//.resizable().ignoresSafeArea()
+                // 48 hour list view
                 List {
                     ForEach(modelData.forecast!.hourly) { hour in
                         HourCondition(current: hour)
                     }
                 }.opacity(0.7)
             }
-            //.background()
-        }//.background(Image("background").ignoresSafeArea())
+        }
     }
 }
 

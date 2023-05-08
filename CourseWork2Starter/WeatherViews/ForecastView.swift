@@ -12,16 +12,16 @@ struct ForecastView: View {
     @State var locationString: String = "No location"
     var body: some View {
         ZStack{
+            // background image
             Image("background2").resizable().ignoresSafeArea()
             VStack{
                 Text("\(modelData.userLocation)")
                     .font(.title)
-                    //.fontWeight(.semibold)
                     .foregroundColor(.black)
                     .shadow(color: .black, radius: 0.5)
                     .multilineTextAlignment(.center)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-
+                // list of 8 day daily view
                 List{
                     ForEach(modelData.forecast!.daily) { day in
                         DailyView(day: day)
