@@ -9,39 +9,51 @@ import SwiftUI
 
 struct NavBar: View {
     
+    @EnvironmentObject var modelData: ModelData
+    
     var body: some View {
-        TabView{
+        
+        TabView {
+            // home view
            Home()
                 .tabItem{
                     
-                    Text("City")
+                    Label("City",systemImage:"magnifyingglass")
                 }
+            // weathernow view
             CurrentWeatherView()
                 .tabItem {
                     
-                    Text("WeatherNow")
+                    Label("Weather Now",systemImage:"sun.max.fill")
                 }
-            
+            // hourly view
             HourlyView()
                 .tabItem{
                     
-                    Text("HourlyView")
+                    Label("Hourly Summery",systemImage: "clock.fill")
                 }
+            // 8 day forcast view
             ForecastView()
                 .tabItem {
                     
-                    Text("ForecastView")
+                    Label("Forecast",systemImage:"calendar")
                 }
+            // air pollution view
             PollutionView()
                 .tabItem {
                     
-                    Text("PollutionView")
+                    Label("Pollution",systemImage: "aqi.high")
                 }
         }.onAppear {
             UITabBar.appearance().isTranslucent = false
         }
+        .tint(Color("tintColor"))
         
     }
-        
 }
 
+struct NavBarView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavBar().environmentObject(ModelData())
+    }
+}

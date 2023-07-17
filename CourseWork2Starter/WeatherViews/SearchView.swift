@@ -10,53 +10,63 @@ import CoreLocation
 
 struct SearchView: View {
     @EnvironmentObject var modelData: ModelData
+    @EnvironmentObject var pollutionData: PollutionData
     
     @Binding var isSearchOpen: Bool
+    @State var showingAlert:Bool = false
     @State var location = ""
-    @Binding var userLocation: String
-    
+
     var body: some View {
-        Spacer()
+        
         ZStack {
-            Color.teal
+            Color("buttonColor")
                 .ignoresSafeArea()
             
             VStack{
-                Text("This is the search view that will allow user to enter new location and the .OnCommit should handle conversion to geo coords and then reversed to get the location if it exists. \n The geo coords are then used to update the weather data for the new location and all views should be updated in rdeal time.\n There is no code to do this - you must create this code.")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.center)
-                    .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
                 TextField("Enter New Location", text: self.$location, onCommit: {
                      
                     CLGeocoder().geocodeAddressString(location) { (placemarks, error) in
 
-                        
+                        if error != nil {
+                            showingAlert = true
+                            return
+                        }
                         if let lat = placemarks?.first?.location?.coordinate.latitude,
                            let lon = placemarks?.first?.location?.coordinate.longitude {
-
-                            isSearchOpen.toggle()
+                            Task{
+                                do{
+                                    // fetching data from openweather
+                                    async let fetchForcastData: () = modelData.fetchWeather(lat:lat,lon: lon)
+                                    async let fetchPollutionData: () = pollutionData.fetchAirPollution(lat:lat,lon:lon)
+                                    // network call
+                                    let (_, _) = await(try fetchForcastData, try fetchPollutionData)
+                                    // getting location string
+                                    async let getLocationData = getLocFromLatLong(lat: modelData.forecast!.lat, lon: modelData.forecast!.lon)
+                                    let location = await getLocationData
+                                    //setting user location
+                                    self.modelData.userLocation = location
+                                }catch{
+                                    // showing the alert if there is a error
+                                    showingAlert = true
+                                    print(error)
+                                }
+                                isSearchOpen.toggle()
+                            }
                         }
-                        
-                        
                     }//GEOCorder
                 } //Commit
                           
-                )// TextField
+                )
                 .padding(10)
-                .shadow(color: .blue, radius: 10)
                 .cornerRadius(10)
                 .fixedSize()
                 .font(.custom("Ariel", size: 26))
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                //.background(Color("background"))
-                .cornerRadius(15) // TextField
+                .cornerRadius(15)
                 
             }//VStak
-            
-            
+        }.alert("Location Doesn't Exist",isPresented:$showingAlert){
+            Button("Try Again",role:.cancel){}
         }// Zstack
-        Spacer()
     }// Some
-    
 } //View

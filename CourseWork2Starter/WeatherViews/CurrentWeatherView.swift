@@ -9,46 +9,75 @@ import SwiftUI
 
 struct CurrentWeatherView: View {
     @EnvironmentObject var modelData: ModelData
-    
-    @State var locationString: String = "No location"
+    @State var weatherIcon:String = ""
+    //@State var locationString: String = "No location"
     
     var body: some View {
         ZStack {
-            // Background Image rendering code here
+            Image("background2").resizable()
         
-            VStack {
-                Text("This is the CurrentWeatherView that displays detailed\n current weather with icons as shown in Figure 2.\n Build this view here")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
+            VStack (spacing:15){
+                Text("\(modelData.userLocation)")
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .shadow(color: .black, radius: 0.5)
                     .multilineTextAlignment(.center)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
 
-                VStack{
-
+                VStack (spacing:40){
         //          Temperature Info
                     VStack {
-                        Text("\((Int)(modelData.forecast!.current.temp))ºC")
+                        Text("\((Int)(modelData.forecast?.current.temp ?? 0))ºC")
                             .padding()
                             .font(.largeTitle)
                         HStack {
-
-                            Text(modelData.forecast!.current.weather[0].weatherDescription.rawValue.capitalized)
+                            // weather icon from openweather
+                            WeatherIcon(icon: $weatherIcon)
+                            Text(modelData.forecast?.current.weather[0].weatherDescription.rawValue.capitalized ?? "No Data")
+                                .foregroundColor(.black)
+                        }.onAppear{
+                            
+                        }
+                        VStack (spacing:20){
+                            HStack(spacing:40){
+                                Text("High: \((Int)(modelData.forecast?.daily[0].temp.max ?? 0))")
+                                Text("Low: \((Int)(modelData.forecast?.daily[0].temp.max ?? 0))")
+                            }
+                            Text("Feels Like: \((Int)(modelData.forecast?.current.feelsLike ?? 0))ºC")
                                 .foregroundColor(.black)
                         }
+                        
+                    }.padding(30)
+                    // wind info
+                    VStack(spacing:50){
+                        HStack(spacing:60){
+                            Text("Wind Speed: \((Int)(modelData.forecast?.daily[0].windSpeed ?? 0)) m/s")
+                            Text("Direction: \(convertDegToCardinal(deg: modelData.forecast?.daily[0].windDeg ?? 0))")
 
-                        Text("Feels Like: \((Int)(modelData.forecast!.current.feelsLike))ºC")
-                            .foregroundColor(.black)
-                    }.padding()
-                    
- 
+                        }
+                        HStack(spacing:50){
+                            Text("Humidity: \((Int)(modelData.forecast?.daily[0].humidity ?? 0))%")
+                            Text("Presure: \(modelData.forecast?.daily[0].pressure ?? 0) hPg")
 
+                        }
+                    }
                 }
-                
+                // sun rise info
+                HStack(spacing:10){
+                    Image(systemName: "sunset.fill").foregroundColor(.yellow)
+                    Text(Date(timeIntervalSince1970: Double(modelData.forecast?.current.sunset ?? 0)).formatted(.dateTime.hour().minute()))
+                    Image(systemName: "sunrise.fill").foregroundColor(.yellow)
+                    Text(Date(timeIntervalSince1970: Double(modelData.forecast!.current.sunrise ?? 0)).formatted(.dateTime.hour().minute()))
+                }
             }
             .foregroundColor(.black)
             .shadow(color: .black,  radius: 0.5)
-            
-        }.ignoresSafeArea(edges: [.top, .trailing, .leading])
+        }
+        .ignoresSafeArea()
+        .onAppear{
+            // updating weather icon data on view appearence
+            weatherIcon = modelData.forecast?.current.weather[0].icon ?? ""
+        }
     }
 }
 
